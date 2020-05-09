@@ -27,10 +27,10 @@ const vehicles =
         vehicle_id: "VH01"
     },
     {
-        make: "Ferrari",
-        model: "430 Scuderia",
+        make_name: "Ferrari",
+        model_name: "430 Scuderia",
         description: "Coupe, Convertible",
-        price: 300000.00,
+        cash_price: 300000.00,
         color: "Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;",
         transmission: "Manual",
         fuel_type: "Diesel",
@@ -40,10 +40,10 @@ const vehicles =
         vehicle_id: "VH01"
     },
     {
-        make: "Ferrari",
-        model: "458 Italia",
+        make_name: "Ferrari",
+        model_name: "458 Italia",
         description: "Coupe",
-        price: 2500000.00,
+        cash_price: 2500000.00,
         color: "Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;",
         transmission: "Manual",
         fuel_type: "Diesel",
