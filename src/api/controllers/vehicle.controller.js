@@ -38,22 +38,23 @@ exports.getDescriptions = async (req, res, next) => {
 exports.getVehicles = async (req, res, next) => {
     console.log('we are on Get vehicles - api/v1/vehicles? api');
     try {
-        var make = req.query.make_name;
-        var model = req.query.model_name;
-        var desc = req.query.description;
-        var modelYear = req.query.model_year
+        let make = req.query.make_name;
+        let model = req.query.model_name;
+        let desc = req.query.description;
+        let modelYear = req.query.model_year;
 
-        console.log('Query Params: ' + req.query);
+        console.log(`Query Params: [make, model, description, model_year [${make},${model},${desc},${modelYear}]`);
         
         var vehicles = null;
-        if (typeof(make) != 'undefined' || typeof(model) != 'undefined' || typeof(desc) != 'undefined' || typeof(model_year) != 'undefined') {
-            vehicles = vehiclesCollection.Vehicles.filter(x => (
+        if (make != undefined || model != undefined || desc != undefined || modelYear != undefined) {
+            vehicles = await vehiclesCollection.Vehicles.filter(x => (
                 x.make_name === make
-                || x.model_name === model
-                || x.description === desc
-                || x.model_year === modelYear));
+                && x.model_name === model
+                && x.description === desc));
         }
-        else { vehicles = vehiclesCollection.Vehicles;}
+        else {
+            vehicles = await vehiclesCollection.Vehicles;
+        }
         
         console.log('Picked vehicles : ' + vehicles);
         
@@ -78,10 +79,30 @@ exports.getVehicles = async (req, res, next) => {
         });
     }
 };
-
+  
 //Get Vehicle details based in id
-exports.getVehicleInfo = (req, res) => {
+exports.getVehicleInfo = async (req, res) => {
     console.log('we are on Get vehile info - api/v1/vehicles/1 api');
     console.log('query params: ' + req.params.id);
-    res.status(httpStatus.OK).json('Vehicle info here - ' + req.params.id);
+    
+    try {
+        var vehicle = await vehiclesCollection.Vehicles.filter(x => x.vehicle_id === req.params.id);
+
+        if (vehicle != '') {
+            res.status(httpStatus.OK).json(vehicle);
+        }
+        else {
+            res.status(httpStatus.NOT_FOUND).json({
+                message: 'No vehicles(s) found',
+                status_code: httpStatus.NOT_FOUND,
+                input_params: req.params.id
+            });
+        }
+    }
+    catch(er) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            message: er,
+            status_code: httpStatus.INTERNAL_SERVER_ERROR
+        });
+    }
 }

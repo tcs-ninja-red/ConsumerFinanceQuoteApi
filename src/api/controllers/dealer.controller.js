@@ -10,7 +10,7 @@ exports.getDealers = async (req, res, next) => {
         
         var dealers = null;
         if (typeof(postcode) != 'undefined') {
-            dealers = await dealerCollection.Dealers.filter(x => x.postcode === postcode);
+            dealers = await dealerCollection.Dealers.filter(x => x.postcode.toLowerCase() === postcode.toLowerCase());
         }
         else { dealers = await dealerCollection.Dealers;}
 

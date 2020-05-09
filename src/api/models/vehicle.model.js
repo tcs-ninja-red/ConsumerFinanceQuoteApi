@@ -24,7 +24,7 @@ const vehicles =
         body_style: "SUV",
         model_year:2008,
         vehicle_mileage:40000,
-        vehicle_id: "VH01"
+        vehicle_id: "VH02"
     },
     {
         make_name: "Ferrari",
@@ -37,7 +37,7 @@ const vehicles =
         body_style: "SUV",
         model_year:2017,
         vehicle_mileage:40000,
-        vehicle_id: "VH01"
+        vehicle_id: "VH03"
     },
     {
         make_name: "Ferrari",
@@ -50,7 +50,7 @@ const vehicles =
         body_style: "SUV",
         model_year:2017,
         vehicle_mileage:40000,
-        vehicle_id: "VH01"
+        vehicle_id: "VH04"
     }
 ]
 
