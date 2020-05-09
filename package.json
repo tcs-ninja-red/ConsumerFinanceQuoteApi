@@ -1,0 +1,16 @@
+{
+  "name": "financequoteapi",
+  "version": "1.0.0",
+  "description": "Finance APIs",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-status": "^1.4.2",
+    "nodemon": "^2.0.3"
+  }
+}
