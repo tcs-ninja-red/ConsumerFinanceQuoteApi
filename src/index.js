@@ -1,12 +1,11 @@
+const { port, env } = require('./constants');
 const app = require('./config/express.config');
 
-app.get('/', (req, res) => {
-    res.json('You are at home');
-});
 
-app.get('/status', (req, res) => {
+// Server healthcheck
+app.get('/help', (req, res) => {
 	res.json({
-		message: 'OK',
+		message: 'In Service',
 		timestamp: new Date().toISOString(),
 		IP: req.ip,
 		URL: req.originalUrl,
@@ -15,9 +14,9 @@ app.get('/status', (req, res) => {
 
 //listen to requests
 
-app.listen(2000,(err) => {
+app.listen(port,(err) => {
     if(err){
         console.log('Server failed to start - ' + err);
     }
-    console.log('Server started on port 2000');
+    console.log(`server started [env, port] = [${env}, ${port}]`);
 });

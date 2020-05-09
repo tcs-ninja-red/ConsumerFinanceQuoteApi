@@ -42,4 +42,4 @@ const dealers =
     }
 ]
 
-module.exports.dealers = dealers;
+module.exports.Dealers = dealers;

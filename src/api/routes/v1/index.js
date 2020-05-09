@@ -4,18 +4,14 @@ const express = require('express');
 const vehicleRoute = require('./vehicle.route');
 const dealerRoute = require('./dealer.route');
 
-console.log('I am in route/index');
-
 const router = express.Router();
 
-/**
- * GET v1/healthcheck
- */
+//GET v1/healthcheck
 router.get('/healthcheck', (req, res) => {
-	console.log('I am in route/index - status api');
+	console.log('we are on healthcheck api');
 	res.json({
-		message: 'OK',
-		timestamp: new Date().toISOString(),
+		message: 'In Service',
+		timestamp: new Date().toLocaleString(),
 		IP: req.ip,
 		URL: req.originalUrl,
 	});
