@@ -41,12 +41,23 @@ exports.calculateQuote = async (req, res, next) => {
     var fixed_rate_interest = rate;
     var apr = rate;
     var total_amount_payable = amount_of_credit + total_charge_for_credit;
-    var first_payment_amount = total_amount_payable / term;
-    var final_payment_amount = first_payment_amount;
-    var monthly_payment_amount = first_payment_amount;
-    var first_payment_amount_pcp = ((total_amount_payable - pricing) / (term - 1));
-    var final_payment_amount_pcp = pricing;
-    var monthly_payment_amount_pcp = first_payment_amount_pcp;
+
+    var first_payment_amount = 0;
+    var final_payment_amount = 0;
+    var monthly_payment_amount = 0;
+
+    if(product === 'HP')
+    {
+        first_payment_amount = (total_amount_payable / term).toFixed(2);
+        final_payment_amount = first_payment_amount;
+        monthly_payment_amount = first_payment_amount;
+    }
+    else if(product === 'PCP') {
+        first_payment_amount = ((total_amount_payable - pricing) / (term - 1)).toFixed(2);
+        final_payment_amount = pricing;
+        monthly_payment_amount = first_payment_amount;
+    }
+
 
 
     res.status(httpStatus.OK).json( {
@@ -76,9 +87,6 @@ exports.calculateQuote = async (req, res, next) => {
         first_payment_amount,
          monthly_payment_amount,
          final_payment_amount,
-         first_payment_amount_pcp,
-         monthly_payment_amount_pcp,
-         final_payment_amount_pcp,
          pricing,
          amount_of_credit,
          total_charge_for_credit,
