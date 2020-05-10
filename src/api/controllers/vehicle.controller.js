@@ -1,5 +1,4 @@
 const httpStatus = require('http-status');
-const bodyParser = require('body-parser');
 const vehiclesCollection = require('../models/vehicle.model');
 
 //Get Makes
