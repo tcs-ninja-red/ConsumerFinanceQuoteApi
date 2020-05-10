@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e1735f51-feda-4a5c-9628-44edfb804f8f",
+		"_postman_id": "5f8e9d24-9f7b-49c9-b204-e82ae6c91232",
 		"name": "Finance API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -556,6 +556,36 @@
 						"models",
 						"430 Scuderia",
 						"descriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calculatequote - /api/v1/quote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"financial\": {\"product\": \"HP\", \"cash_price\": 10000.00, \"deposits\": {\"cash_deposit\": 2000.00, \"cheque_deposit\": 0.00, \"card_deposit\": 0.00,  \"total_deposit\": 0.00}, \"term\": 12, \"max_annual_mileage\": 6000}, \"vehicle\": {\"vehicle_mileage\": 5000, \"registration_month\": \"01\", \"registration_year\": 2019, \"make\": \"Ford\", \"model\": \"Focus\", \"description\": \"2019 model\", \"model_year\": 2019 }}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44301/api/v1/quotes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"quotes"
 					]
 				}
 			},
