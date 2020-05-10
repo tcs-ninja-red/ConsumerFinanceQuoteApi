@@ -1,0 +1,596 @@
+{
+	"info": {
+		"_postman_id": "d735afc3-cb9d-4a12-9566-49b8a9df81c3",
+		"name": "Finance API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "healthcheck - api/v1/healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/healthcheck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"healthcheck"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "healthcheck - api/v1/healthcheck",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/healthcheck",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"healthcheck"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5f-bs3xrM5FhCe7DsXfpnnzLpZ24Xk\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 May 2020 20:39:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"In Service\",\n    \"timestamp\": \"2020-5-9 21:39:03\",\n    \"IP\": \"::1\",\n    \"URL\": \"/api/v1/healthcheck\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetVehicles - api/v1/vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"vehicles"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetVehicles - api/v1/vehicles",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/vehicles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"vehicles"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1868"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"74c-eDueAISG6ZM4MS2mbGjSEN+LG3I\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 May 2020 20:38:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"make_name\": \"Chevrolet\",\n        \"model_name\": \"Aveo [2006-2009]\",\n        \"description\": \"Small car 1.4\",\n        \"cash_price\": 500000,\n        \"color\": \"Intense Black;Cashmere;Sterling Silver;Blazing Red;Platinum Metallic;Amber;Casablanca White;\",\n        \"transmission\": \"Manual\",\n        \"fuel_type\": \"Petrol\",\n        \"body_style\": \"Sedan\",\n        \"model_year\": 2006,\n        \"vehicle_mileage\": 40000,\n        \"vehicle_id\": \"VH01\"\n    },\n    {\n        \"make_name\": \"Chevrolet\",\n        \"model_name\": \"Tavera\",\n        \"description\": \"Compact SUV Small car CNG 1.4\",\n        \"cash_price\": 480000,\n        \"color\": \"Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;\",\n        \"transmission\": \"Manual\",\n        \"fuel_type\": \"Diesel\",\n        \"body_style\": \"SUV\",\n        \"model_year\": 2008,\n        \"vehicle_mileage\": 40000,\n        \"vehicle_id\": \"VH02\"\n    },\n    {\n        \"make_name\": \"Ferrari\",\n        \"model_name\": \"430 Scuderia\",\n        \"description\": \"Coupe, Convertible\",\n        \"price\": 300000,\n        \"color\": \"Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;\",\n        \"transmission\": \"Manual\",\n        \"fuel_type\": \"Diesel\",\n        \"body_style\": \"SUV\",\n        \"model_year\": 2017,\n        \"vehicle_mileage\": 40000,\n        \"vehicle_id\": \"VH03\"\n    },\n    {\n        \"make_name\": \"Ferrari\",\n        \"model_name\": \"458 Italia\",\n        \"description\": \"Coupe\",\n        \"price\": 2500000,\n        \"color\": \"Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;\",\n        \"transmission\": \"Manual\",\n        \"fuel_type\": \"Diesel\",\n        \"body_style\": \"SUV\",\n        \"model_year\": 2017,\n        \"vehicle_mileage\": 40000,\n        \"vehicle_id\": \"VH04\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GetVehicleInfo - api/v1/vehicles/VH01",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/vehicles/VH01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"VH01"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetVehicleInfo - api/v1/vehicles/VH01",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/vehicles/VH01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"vehicles",
+								"VH01"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "340"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"154-8vMpzAOWrYbf8C9xonWuisJtZnw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 May 2020 20:36:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"make_name\": \"Chevrolet\",\n        \"model_name\": \"Aveo [2006-2009]\",\n        \"description\": \"Small car 1.4\",\n        \"cash_price\": 500000,\n        \"color\": \"Intense Black;Cashmere;Sterling Silver;Blazing Red;Platinum Metallic;Amber;Casablanca White;\",\n        \"transmission\": \"Manual\",\n        \"fuel_type\": \"Petrol\",\n        \"body_style\": \"Sedan\",\n        \"model_year\": 2006,\n        \"vehicle_mileage\": 40000,\n        \"vehicle_id\": \"VH01\"\n    }\n]"
+				},
+				{
+					"name": "GetVehicleInfo - api/v1/vehicles/VH01",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/vehicles/VH01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"vehicles",
+								"VH01"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "340"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"154-8vMpzAOWrYbf8C9xonWuisJtZnw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 May 2020 20:36:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"make_name\": \"Chevrolet\",\n        \"model_name\": \"Aveo [2006-2009]\",\n        \"description\": \"Small car 1.4\",\n        \"cash_price\": 500000,\n        \"color\": \"Intense Black;Cashmere;Sterling Silver;Blazing Red;Platinum Metallic;Amber;Casablanca White;\",\n        \"transmission\": \"Manual\",\n        \"fuel_type\": \"Petrol\",\n        \"body_style\": \"Sedan\",\n        \"model_year\": 2006,\n        \"vehicle_mileage\": 40000,\n        \"vehicle_id\": \"VH01\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GetDealers - api/v1/dealers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/dealers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"dealers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDealersByFilter - api/v1/dealers?postcode=",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/dealers?postcode=CF10 5BH",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"dealers"
+					],
+					"query": [
+						{
+							"key": "postcode",
+							"value": "CF10 5BH"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetDealersByFilter - api/v1/dealers?postcode=",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/dealers?postcode=CF10 5Bh&",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"dealers"
+							],
+							"query": [
+								{
+									"key": "postcode",
+									"value": "CF10 5Bh"
+								},
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "191"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"bf-N1sRzBg+cE4xOmovR1JICwEVfzU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 May 2020 20:38:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"dealer_id\": \"54000903\",\n        \"dealer_name\": \"Suzuki Motor pvt Ltd\",\n        \"address1\": \"Address 1\",\n        \"address2\": \"Address 2\",\n        \"address3\": \"address 3\",\n        \"postcode\": \"CF10 5BH\",\n        \"town\": \"Grangetown\",\n        \"city\": \"Cardiff\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GetVehiclesByFilter - api/v1/vehicles?make_name=",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/vehicles?make_name=Ferrari&model_name=430 Scuderia&description=Coupe, Convertible",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"vehicles"
+					],
+					"query": [
+						{
+							"key": "make_name",
+							"value": "Ferrari"
+						},
+						{
+							"key": "model_name",
+							"value": "430 Scuderia"
+						},
+						{
+							"key": "description",
+							"value": "Coupe, Convertible"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetVehiclesByFilter - api/v1/vehicles?make_name=",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/vehicles?make_name=Ferrari&model_name=430 Scuderia&description=Coupe, Convertible",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"vehicles"
+							],
+							"query": [
+								{
+									"key": "make_name",
+									"value": "Ferrari"
+								},
+								{
+									"key": "model_name",
+									"value": "430 Scuderia"
+								},
+								{
+									"key": "description",
+									"value": "Coupe, Convertible"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "511"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1ff-pTSqzQW/h2BwXVa+2ojBW8kT0lI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 May 2020 20:38:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"make_name\": \"Ferrari\",\n        \"model_name\": \"430 Scuderia\",\n        \"description\": \"Coupe, Convertible\",\n        \"price\": 300000,\n        \"color\": \"Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;\",\n        \"transmission\": \"Manual\",\n        \"fuel_type\": \"Diesel\",\n        \"body_style\": \"SUV\",\n        \"model_year\": 2017,\n        \"vehicle_mileage\": 40000,\n        \"vehicle_id\": \"VH03\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GetMakes - api/v1/vehicles/makes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/vehicles/makes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"makes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetModels - api/v1/vehicles/makes/Ferrari/models",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/vehicles/makes/Ferrari/models",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"makes",
+						"Ferrari",
+						"models"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDescriptions - api/v1/vehicles/makes/Ferrari/models/430 Scuderia/descriptions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/vehicles/makes/Ferrari/models/430 Scuderia/descriptions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"makes",
+						"Ferrari",
+						"models",
+						"430 Scuderia",
+						"descriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CalculateQuote - /api/v1/quotes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"financial\": {\n        \"product\": \"HP\",\n        \"cash_price\": 10000,\n        \"deposit_amount\": 2000,\n        \"term\": 12\n    },\n    \"max_annual_mileage\": 6000,\n    \"vehicle\": {\n        \"vehicle_mileage\": 5000,\n        \"registration_month\": 1,\n        \"registration_year\": 2019,\n        \"make\": \"Ford\",\n        \"model\": \"Focus\",\n        \"description\": \"2019 model\",\n        \"model_year\": 2019\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:44301/api/v1/quotes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"quotes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
