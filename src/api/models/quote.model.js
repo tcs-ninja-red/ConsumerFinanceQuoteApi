@@ -3,14 +3,14 @@
 const quoteRequest = {
     financial: {
         product: String, // HP or PCP
-        cash_price: decimal,
+        cash_price: Number,
         deposits: {
-            cash_deposit: decimal,
-            cheque_deposit: decimal,
-            card_deposit: decimal,
-            total_deposit: decimal
+            cash_deposit: Number,
+            cheque_deposit: Number,
+            card_deposit: Number,
+            total_deposit: Number
         },
-        term: decimal,
+        term: Number,
         max_annual_mileage: Int32Array
     },
     vehicle: {
@@ -29,14 +29,14 @@ const quoteRequest = {
 const quoteResponse = {
     financial: {
         product: String, // HP or PCP
-        cash_price: decimal,
+        cash_price: Number,
         deposits: {
-            cash_deposit: decimal,
-            cheque_deposit: decimal,
-            card_deposit: decimal,
-            total_deposit: decimal
+            cash_deposit: Number,
+            cheque_deposit: Number,
+            card_deposit: Number,
+            total_deposit: Number
         },
-        term: decimal
+        term: Number
     },
     vehicle: {
         vehicle_mileage: Int32Array,
@@ -49,12 +49,12 @@ const quoteResponse = {
         excess_mileage: Int32Array
     },
     max_annual_mileage: Int32Array,
-    first_payment_amount: decimal,
-    monthly_payment_amount: decimal,
-    final_payment_amount: decimal,
-    amount_of_credit: decimal,
-    total_charge_for_credit: decimal,
-    fixed_rate_interest: decimal,
-    apr: decimal,
-    total_amount_payable: decimal
+    first_payment_amount: Number,
+    monthly_payment_amount: Number,
+    final_payment_amount: Number,
+    amount_of_credit: Number,
+    total_charge_for_credit: Number,
+    fixed_rate_interest: Number,
+    apr: Number,
+    total_amount_payable: Number
 }
