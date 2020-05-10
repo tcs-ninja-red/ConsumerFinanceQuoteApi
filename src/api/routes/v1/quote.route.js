@@ -1,12 +1,7 @@
 const express = require('express');
-// Import our Controllers
-
-const controller = require('../../controllers/quote.controller');
-
+const controller = require('../../controllers/quote.controller')
 const router = express.Router();
 
-router.use(express.json());    // <==== parse request body as JSON
-
-router.route('/').post(controller.quote);
+router.route('/').post(controller.calculateQuote);
 
 module.exports = router;

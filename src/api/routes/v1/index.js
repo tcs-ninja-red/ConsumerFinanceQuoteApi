@@ -20,6 +20,6 @@ router.get('/healthcheck', (req, res) => {
 
 router.use('/vehicles', vehicleRoute);
 router.use('/dealers', dealerRoute);
-router.use('/quote', quoteRoute);
+router.use('/quotes', quoteRoute);
 
 module.exports = router;

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const quoteresp = require('../models/quote.model');
 
 
-exports.quote = async (req, res, next) => {
+exports.calculateQuote = async (req, res, next) => {
 
  try {
 
@@ -49,7 +49,7 @@ exports.quote = async (req, res, next) => {
     var monthly_payment_amount_pcp = first_payment_amount_pcp;
 
 
-    res.status(200).json( {
+    res.status(httpStatus.OK).json( {
         financials: {
         product ,
         cash_price ,
