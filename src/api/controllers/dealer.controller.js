@@ -1,5 +1,4 @@
 const httpStatus = require('http-status');
-const bodyParser = require('body-parser');
 const dealerCollection = require('../models/dealer.model');
 
 exports.getDealers = async (req, res, next) => {

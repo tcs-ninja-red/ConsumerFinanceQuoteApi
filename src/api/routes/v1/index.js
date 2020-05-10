@@ -3,6 +3,7 @@ const express = require('express');
 // import all the routes here
 const vehicleRoute = require('./vehicle.route');
 const dealerRoute = require('./dealer.route');
+const quoteRoute = require('./quote.route');
 
 const router = express.Router();
 
@@ -19,5 +20,6 @@ router.get('/healthcheck', (req, res) => {
 
 router.use('/vehicles', vehicleRoute);
 router.use('/dealers', dealerRoute);
+router.use('/quotes', quoteRoute);
 
 module.exports = router;
