@@ -11,12 +11,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/healthcheck",
+					"raw": "http://localhost:44301/api/v1/healthcheck",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "44301",
 					"path": [
 						"api",
 						"v1",
@@ -84,12 +84,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/vehicles",
+					"raw": "http://localhost:44301/api/v1/vehicles",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "44301",
 					"path": [
 						"api",
 						"v1",
@@ -157,12 +157,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/vehicles/VH01",
+					"raw": "http://localhost:44301/api/v1/vehicles/VH01",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "44301",
 					"path": [
 						"api",
 						"v1",
@@ -284,12 +284,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/dealers",
+					"raw": "http://localhost:44301/api/v1/dealers",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "44301",
 					"path": [
 						"api",
 						"v1",
@@ -305,7 +305,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/dealers?postcode=CF10 5Bh&",
+					"raw": "http://localhost:3000/api/v1/dealers?postcode=CF10 5Bh",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -320,10 +320,6 @@
 						{
 							"key": "postcode",
 							"value": "CF10 5Bh"
-						},
-						{
-							"key": "",
-							"value": null
 						}
 					]
 				}
@@ -398,12 +394,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/vehicles?make_name=Ferrari&model_name=430 Scuderia&description=Coupe, Convertible",
+					"raw": "http://localhost:44301/api/v1/vehicles?make_name=Ferrari&model_name=430 Scuderia&description=Coupe, Convertible",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "44301",
 					"path": [
 						"api",
 						"v1",
@@ -492,6 +488,78 @@
 					"body": "[\n    {\n        \"make_name\": \"Ferrari\",\n        \"model_name\": \"430 Scuderia\",\n        \"description\": \"Coupe, Convertible\",\n        \"price\": 300000,\n        \"color\": \"Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;\",\n        \"transmission\": \"Manual\",\n        \"fuel_type\": \"Diesel\",\n        \"body_style\": \"SUV\",\n        \"model_year\": 2017,\n        \"vehicle_mileage\": 40000,\n        \"vehicle_id\": \"VH03\"\n    }\n]"
 				}
 			]
+		},
+		{
+			"name": "GetMakes - api/v1/vehicles/makes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/vehicles/makes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"makes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetModels - api/v1/vehicles/makes/Ferrari/models",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/vehicles/makes/Ferrari/models",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"makes",
+						"Ferrari",
+						"models"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDescriptions - api/v1/vehicles/makes/Ferrari/models/430 Scuderia/descriptions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/vehicles/makes/Ferrari/models/430 Scuderia/descriptions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"makes",
+						"Ferrari",
+						"models",
+						"430 Scuderia",
+						"descriptions"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
