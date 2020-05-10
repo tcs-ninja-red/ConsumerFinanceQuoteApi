@@ -4,15 +4,14 @@ const dealerCollection = require('../models/dealer.model');
 exports.getDealers = async (req, res, next) => {
     console.log('we are on Get dealers - api/v1/dealers? api');
     try {
-        var postcode = req.query.postcode;
+        let postcode = req.query.postcode;
         console.log('Postcode = ' + postcode);
         
-        var dealers = null;
+        let dealers = null;
         if (typeof(postcode) != 'undefined') {
             dealers = await dealerCollection.Dealers.filter(x => x.postcode.toLowerCase() === postcode.toLowerCase());
         }
-        else { dealers = await dealerCollection.Dealers;}
-
+        else { dealers = await dealerCollection.Dealers; }
         
         console.log('Picked dealers : ' + dealers);
         

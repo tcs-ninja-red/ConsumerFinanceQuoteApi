@@ -4,8 +4,6 @@ const vehiclesCollection = require('../models/vehicle.model');
 //Get Makes
 exports.getMakes = async (req, res, next) => {
     try {
-        //let modelYear = req.query.model_year;
-        //res.status(httpStatus.OK).json('list vehicle makes');
         const makeList = await vehiclesCollection.Vehicles.map(a => a.make_name)
         .filter((value, index, self) => self.indexOf(value) === index);
         res.status(httpStatus.OK).json(makeList);
@@ -16,9 +14,9 @@ exports.getMakes = async (req, res, next) => {
     }
 }
 
+//Get Models based on given make
 exports.getModels = async (req, res, next) => {
     try {
-        //res.status(httpStatus.OK).json('list vehicle models');
         const modelList = await vehiclesCollection.Vehicles.filter(e => e.make_name === req.params.make_name)
         .map(a => a.model_name);
 
@@ -30,14 +28,14 @@ exports.getModels = async (req, res, next) => {
     }
 }
 
+// Get Descriptions based on given make and model
 exports.getDescriptions = async (req, res, next) => {
     try {
-        //res.status(httpStatus.OK).json('list vehicle descriptions');
         var descriptionList = vehiclesCollection.Vehicles.filter(a => (a.make_name === req.params.make_name &&
             a.model_name === req.params.model_name))
         .map(a=>a.description);
 
-      res.status(200).json(descriptionList);
+      res.status(httpStatus.OK).json(descriptionList);
         
     } catch (error) {
         next(error);
@@ -56,7 +54,7 @@ exports.getVehicles = async (req, res, next) => {
 
         console.log(`Query Params: [make, model, description, model_year [${make},${model},${desc},${modelYear}]`);
         
-        var vehicles = null;
+        let vehicles = null;
         if (make != undefined || model != undefined || desc != undefined || modelYear != undefined) {
             vehicles = await vehiclesCollection.Vehicles.filter(x => (
                 x.make_name === make
@@ -97,7 +95,7 @@ exports.getVehicleInfo = async (req, res) => {
     console.log('query params: ' + req.params.id);
     
     try {
-        var vehicle = await vehiclesCollection.Vehicles.filter(x => x.vehicle_id === req.params.id);
+        let vehicle = await vehiclesCollection.Vehicles.filter(x => x.vehicle_id === req.params.id);
 
         if (vehicle != '') {
             res.status(httpStatus.OK).json(vehicle);
