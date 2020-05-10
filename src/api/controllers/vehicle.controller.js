@@ -6,7 +6,7 @@ exports.getMakes = async (req, res, next) => {
     try {
         //let modelYear = req.query.model_year;
         //res.status(httpStatus.OK).json('list vehicle makes');
-        const makeList = await vehiclesCollection.vehicles.map(a => a.make_name)
+        const makeList = await vehiclesCollection.Vehicles.map(a => a.make_name)
         .filter((value, index, self) => self.indexOf(value) === index);
         res.status(httpStatus.OK).json(makeList);
         
@@ -19,7 +19,7 @@ exports.getMakes = async (req, res, next) => {
 exports.getModels = async (req, res, next) => {
     try {
         //res.status(httpStatus.OK).json('list vehicle models');
-        const modelList = await vehiclesCollection.vehicles.filter(e => e.make_name === req.params.make_name)
+        const modelList = await vehiclesCollection.Vehicles.filter(e => e.make_name === req.params.make_name)
         .map(a => a.model_name);
 
         res.status(httpStatus.OK).json(modelList);
@@ -33,7 +33,7 @@ exports.getModels = async (req, res, next) => {
 exports.getDescriptions = async (req, res, next) => {
     try {
         //res.status(httpStatus.OK).json('list vehicle descriptions');
-        var descriptionList = vehiclesCollection.vehicles.filter(a => (a.make_name === req.params.make_name &&
+        var descriptionList = vehiclesCollection.Vehicles.filter(a => (a.make_name === req.params.make_name &&
             a.model_name === req.params.model_name))
         .map(a=>a.description);
 
