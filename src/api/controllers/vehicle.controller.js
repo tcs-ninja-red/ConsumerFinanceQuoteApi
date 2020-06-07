@@ -31,9 +31,9 @@ exports.getModels = async (req, res, next) => {
 // Get Descriptions based on given make and model
 exports.getDescriptions = async (req, res, next) => {
     try {
-        var descriptionList = vehiclesCollection.Vehicles.filter(a => (a.make_name === req.params.make_name &&
-            a.model_name === req.params.model_name))
-        .map(a=>a.description);
+        var descriptionList = await vehiclesCollection.find({"make_name" : req.params.make_name,
+        "model_name" : req.params.model_name})
+        .select({"description" : 1, "_id" : 0});
 
       res.status(httpStatus.OK).json(descriptionList);
         
@@ -56,13 +56,13 @@ exports.getVehicles = async (req, res, next) => {
         
         let vehicles = null;
         if (make != undefined || model != undefined || desc != undefined || modelYear != undefined) {
-            vehicles = await vehiclesCollection.Vehicles.filter(x => (
-                x.make_name === make
-                && x.model_name === model
-                && x.description === desc));
+            vehicles = await vehiclesCollection.find({
+                "make_name" : make,
+                "model_name" : model,
+                "description" : desc});
         }
         else {
-            vehicles = await vehiclesCollection.Vehicles;
+            vehicles = await vehiclesCollection.find();
         }
         
         console.log('Picked vehicles : ' + vehicles);
@@ -95,7 +95,7 @@ exports.getVehicleInfo = async (req, res) => {
     console.log('query params: ' + req.params.id);
     
     try {
-        let vehicle = await vehiclesCollection.Vehicles.filter(x => x.vehicle_id === req.params.id);
+        var vehicle = await vehiclesCollection.find({"vehicle_id" : req.params.id});
 
         if (vehicle != '') {
             res.status(httpStatus.OK).json(vehicle);
