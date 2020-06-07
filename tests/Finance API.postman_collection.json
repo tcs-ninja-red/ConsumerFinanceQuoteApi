@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5f8e9d24-9f7b-49c9-b204-e82ae6c91232",
+		"_postman_id": "d735afc3-cb9d-4a12-9566-49b8a9df81c3",
 		"name": "Finance API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -305,12 +305,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/dealers?postcode=CF10 5Bh",
+					"raw": "http://localhost:44301/api/v1/dealers?postcode=CF10 5BH",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "44301",
 					"path": [
 						"api",
 						"v1",
@@ -319,7 +319,7 @@
 					"query": [
 						{
 							"key": "postcode",
-							"value": "CF10 5Bh"
+							"value": "CF10 5BH"
 						}
 					]
 				}
@@ -495,12 +495,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/vehicles/makes",
+					"raw": "http://localhost:44301/api/v1/vehicles/makes",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "44301",
 					"path": [
 						"api",
 						"v1",
@@ -541,12 +541,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/vehicles/makes/Ferrari/models/430 Scuderia/descriptions",
+					"raw": "http://localhost:44301/api/v1/vehicles/makes/Ferrari/models/430 Scuderia/descriptions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "44301",
 					"path": [
 						"api",
 						"v1",
@@ -562,13 +562,13 @@
 			"response": []
 		},
 		{
-			"name": "Calculatequote - /api/v1/quote",
+			"name": "CalculateQuote - /api/v1/quotes",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"financial\": {\"product\": \"HP\", \"cash_price\": 10000.00, \"deposits\": {\"cash_deposit\": 2000.00, \"cheque_deposit\": 0.00, \"card_deposit\": 0.00,  \"total_deposit\": 0.00}, \"term\": 12, \"max_annual_mileage\": 6000}, \"vehicle\": {\"vehicle_mileage\": 5000, \"registration_month\": \"01\", \"registration_year\": 2019, \"make\": \"Ford\", \"model\": \"Focus\", \"description\": \"2019 model\", \"model_year\": 2019 }}",
+					"raw": "{\n    \"financial\": {\n        \"product\": \"HP\",\n        \"cash_price\": 10000,\n        \"deposit_amount\": 2000,\n        \"term\": 12\n    },\n    \"max_annual_mileage\": 6000,\n    \"vehicle\": {\n        \"vehicle_mileage\": 5000,\n        \"registration_month\": 1,\n        \"registration_year\": 2019,\n        \"make\": \"Ford\",\n        \"model\": \"Focus\",\n        \"description\": \"2019 model\",\n        \"model_year\": 2019\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"

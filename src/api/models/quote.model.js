@@ -1,15 +1,10 @@
 //Request & Response Payload Json
 
-const quote = {
+const quoteModel = {
     "financial": {
         "product": "string",
         "cash_price": "decimal",
-        "deposits": {
-            "cash_deposit": "decimal",
-            "cheque_deposit": "decimal",
-            "card_deposit": "decimal",
-            "total_deposit": "decimal"
-        },
+        "deposit_amount": "decimal",
         "term": "decimal"
     },
     "vehicle": {
@@ -19,9 +14,9 @@ const quote = {
         "make": "string",
         "model": "string",
         "description": "string",
-        "model_year": "integer",
-        "excess_mileage": "integer"
+        "model_year": "integer"
     },
+    "excess_mileage": "integer",
     "max_annual_mileage": "integer",
     "first_payment_amount": "decimal",
     "monthly_payment_amount": "decimal",
@@ -33,4 +28,4 @@ const quote = {
     "total_amount_payable": "decimal"
 }
 
-module.exports.Quote = quote;
+module.exports.Quote = quoteModel;
