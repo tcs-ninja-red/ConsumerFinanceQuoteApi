@@ -1,6 +1,9 @@
 const { port, env } = require('./constants');
 const app = require('./config/express.config');
+const mongo = require('./dbconnection');
 
+//DB connection
+mongo.connect;
 
 // Server healthcheck
 app.get('/help', (req, res) => {
