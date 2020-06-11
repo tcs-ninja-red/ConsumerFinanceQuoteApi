@@ -8,10 +8,10 @@ exports.getDealers = async (req, res, next) => {
         console.log('Postcode = ' + postcode);
         
         let dealers = null;
-        if (typeof(postcode) != 'undefined') {
-            dealers = await dealerCollection.Dealers.filter(x => x.postcode.toLowerCase() === postcode.toLowerCase());
+        if (typeof(postcode) != 'undefined') {            
+            dealers = await dealerCollection.find({"postcode" : new RegExp('\\b' + postcode + '\\b', 'i') });
         }
-        else { dealers = await dealerCollection.Dealers; }
+        else { dealers = await dealerCollection.find({}); }
         
         console.log('Picked dealers : ' + dealers);
         
