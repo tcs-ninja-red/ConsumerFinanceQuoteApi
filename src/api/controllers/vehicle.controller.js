@@ -42,15 +42,17 @@ exports.getMakes = async (req, res, next) => {
                 },
                 {
                     $project:{
-                       make_name : 1
+                        _id : 0,
+                        make_name : '$make_name'            
                     }
                 }
  
             ],
             function (err, response) {
                 console.log(err,response)
-                console.log(response)
-                res.status(httpStatus.OK).json(response);
+                let uniquemakes = [...new Set(response.map(item => item.make_name))];    
+                //console.log(uniquemakes)
+                res.status(httpStatus.OK).json(uniquemakes);
             }
             );
     
