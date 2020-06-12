@@ -17,7 +17,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                 echo 'Build..'
+               sh "docker images"
+               sh "docker build -t consumer-finance-house-quote-api:v${BUILD_NUMBER} ."
+               sh "docker images"
             }
         }
         stage('Test') {
@@ -27,7 +29,12 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                  echo 'Deplpoy..'
+                sh "docker ps -a"
+                sh 'docker stop api-quotes-container || exit 0'
+                sh 'docker kill api-quotes-container || exit 0'
+                sh 'docker rm api-quotes-container || exit 0'
+                sh "docker run -d --name api-quotes-container -p 44301:44301 consumer-finance-house-quote-api:v${BUILD_NUMBER}"
+                sh "docker ps -a"
             }
         }
     }
