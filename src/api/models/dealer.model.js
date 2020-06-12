@@ -10,6 +10,6 @@ var dealerSchema = mongoose.Schema(
     postcode:       {type:String},
     town:           {type:String},
     city:           {type:String}
- });
+ }); 
 
 module.exports = mongoose.model('Dealer', dealerSchema, 'Dealer');

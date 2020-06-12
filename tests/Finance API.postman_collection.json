@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "d735afc3-cb9d-4a12-9566-49b8a9df81c3",
-		"name": "Finance API",
+		"_postman_id": "f3b442c3-de82-4a18-84c0-fe9ee21db304",
+		"name": "Finance API copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -586,6 +586,34 @@
 						"api",
 						"v1",
 						"quotes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getmakes bydealer filter - api/v1/vehicles/makes?dealer_id=dlr0000001",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44301/api/v1/vehicles/makes?dealer_id=dlr0000001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44301",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"makes"
+					],
+					"query": [
+						{
+							"key": "dealer_id",
+							"value": "dlr0000001"
+						}
 					]
 				}
 			},
