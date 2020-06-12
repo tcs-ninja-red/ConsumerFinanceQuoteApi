@@ -125,9 +125,9 @@ exports.calculateQuote = async (chunk, price) => {
     else if (product === 'PCP') {
         let pricingPerc = price;
     
-        if (pricingPerc === undefined) {
-            pricingPerc = 50;
-        }
+        // if (pricingPerc === undefined) {
+        //     pricingPerc = 50;
+        // }
 
         let pricing = (cash_price * pricingPerc) / 100;
         first_payment_amount = ((total_amount_payable - pricing) / (term - 1));

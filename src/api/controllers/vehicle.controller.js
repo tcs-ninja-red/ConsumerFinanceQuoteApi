@@ -81,16 +81,27 @@ exports.getMakes = async (req, res, next) => {
 
 //Get Models based on given make
 exports.getModels = async (req, res, next) => {
-    try {
-        const modelList = await vehiclesCollection.Vehicles.filter(e => e.make_name === req.params.make_name)
-        .map(a => a.model_name);
-
-        res.status(httpStatus.OK).json(modelList);
-        
-    } catch (error) {
-        next(error);
-        res.status(httpStatus.NOT_FOUND);
-    }
+    console.log('we are on Get Models - api/v1/vehicles/make/2/models api');
+    await vehiclesCollection.distinct("model_name", { "make_name": req.params.make_name })
+        .then(result => {
+            console.log("Models List from Database", result);
+            if (result.length > 0) {
+                res.status(httpStatus.OK).json(result);
+            }
+            else {
+                res.status(httpStatus.NOT_FOUND).json({
+                    message: "No Models found for this Make: " + req.params.make_name ,
+                    status_code: httpStatus.NOT_FOUND
+                });
+            }
+        })
+        .catch(err => {
+            next(err);
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+                message: "Something went wrong. " + err,
+                status_code: httpStatus.INTERNAL_SERVER_ERROR
+            });
+        });
 }
 
 // Get Descriptions based on given make and model
