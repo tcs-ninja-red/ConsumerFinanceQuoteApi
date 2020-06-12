@@ -11,8 +11,8 @@ exports.getMakes = async (req, res, next) => {
         
         let dealerstock = null;
         if (dealer_id == undefined) {
-            dealerstock = await vehiclesCollection.find();
-            console.log('Picked vehicles : ' + dealerstock);
+            dealerstock = await vehiclesCollection.distinct("make_name");
+            console.log('Picked Makes : ' + dealerstock);
             //console.log("$dealer_stock_vehicles");
             if (dealerstock  != ''){
                 res.status(httpStatus.OK).json(dealerstock);
@@ -42,20 +42,7 @@ exports.getMakes = async (req, res, next) => {
                 },
                 {
                     $project:{
-                       _id : 1,
-                       vehicle_code : 1,
-                       make_name : 1,
-                       model_name : 1,
-                       description : 1,
-                       cash_price : 1,
-                       color : 1,
-                       transmission : 1,
-                       fuel_type : 1,
-                       body_style: 1,
-                       model_year: 1,
-                       vehicle_mileage: 1,
-                       registration_month: 1,
-                       registration_year: 1
+                       make_name : 1
                     }
                 }
  
@@ -81,31 +68,57 @@ exports.getMakes = async (req, res, next) => {
 
 //Get Models based on given make
 exports.getModels = async (req, res, next) => {
-    try {
-        const modelList = await vehiclesCollection.Vehicles.filter(e => e.make_name === req.params.make_name)
-        .map(a => a.model_name);
-
-        res.status(httpStatus.OK).json(modelList);
-        
-    } catch (error) {
-        next(error);
-        res.status(httpStatus.NOT_FOUND);
-    }
+    console.log('we are on Get Models - api/v1/vehicles/make/2/models api');
+    await vehiclesCollection.distinct("model_name", { "make_name": req.params.make_name })
+        .then(result => {
+            console.log("Models List from Database", result);
+            if (result.length > 0) {
+                res.status(httpStatus.OK).json(result);
+            }
+            else {
+                res.status(httpStatus.NOT_FOUND).json({
+                    message: "No Models found for this Make: " + req.params.make_name ,
+                    status_code: httpStatus.NOT_FOUND
+                });
+            }
+        })
+        .catch(err => {
+            next(err);
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+                message: "Something went wrong. " + err,
+                status_code: httpStatus.INTERNAL_SERVER_ERROR
+            });
+        });
 }
 
 // Get Descriptions based on given make and model
 exports.getDescriptions = async (req, res, next) => {
-    try {
-        var descriptionList = await vehiclesCollection.find({"make_name" : req.params.make_name,
-        "model_name" : req.params.model_name})
-        .select({"description" : 1, "_id" : 0});
-
-      res.status(httpStatus.OK).json(descriptionList);
-        
-    } catch (error) {
-        next(error);
-        res.status(httpStatus.NOT_FOUND);
-    }
+    
+    console.log('we are on Get Descriptions - api/v1/vehicles/make/2/models/23/descriptions api');
+    await vehiclesCollection.distinct("description",
+        {
+            "make_name": req.params.make_name,
+            "model_name" : req.params.model_name
+        })
+        .then(result => {
+            console.log("Descriptions List from Database", result);
+            if (result.length > 0) {
+                res.status(httpStatus.OK).json(result);
+            }
+            else {
+                res.status(httpStatus.NOT_FOUND).json({
+                    message: "No Description found for this Make : " + req.params.make_name + "Models: " + req.params.model_name ,
+                    status_code: httpStatus.NOT_FOUND
+                });
+            }
+        })
+        .catch(err => {
+            next(err);
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+                message: "Something went wrong. " + err,
+                status_code: httpStatus.INTERNAL_SERVER_ERROR
+            });
+        });
 }
 
 //Get Vehicles based on filter
