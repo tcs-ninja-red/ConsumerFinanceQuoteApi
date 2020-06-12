@@ -1,57 +1,20 @@
-const vehicles =   
-[
-    {
-        make_name: "Chevrolet",
-        model_name: "Aveo [2006-2009]",
-        description: "Small car 1.4",
-        cash_price: 500000.00,
-        color: "Intense Black;Cashmere;Sterling Silver;Blazing Red;Platinum Metallic;Amber;Casablanca White;",
-        transmission: "Manual",
-        fuel_type: "Petrol",
-        body_style: "Sedan",
-        model_year:2006,
-        vehicle_mileage: 40000,
-        vehicle_id: "VH01"
-    },
-    {
-        make_name: "Chevrolet",
-        model_name: "Tavera",
-        description: "Compact SUV Small car CNG 1.4",
-        cash_price: 480000,
-        color: "Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;",
-        transmission: "Manual",
-        fuel_type: "Diesel",
-        body_style: "SUV",
-        model_year:2008,
-        vehicle_mileage:40000,
-        vehicle_id: "VH01"
-    },
-    {
-        make: "Ferrari",
-        model: "430 Scuderia",
-        description: "Coupe, Convertible",
-        price: 300000.00,
-        color: "Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;",
-        transmission: "Manual",
-        fuel_type: "Diesel",
-        body_style: "SUV",
-        model_year:2017,
-        vehicle_mileage:40000,
-        vehicle_id: "VH01"
-    },
-    {
-        make: "Ferrari",
-        model: "458 Italia",
-        description: "Coupe",
-        price: 2500000.00,
-        color: "Caviar Black;Cavlar Black + Linen Beige;Velvet Red;Velvet Red + Linen Beige;Sandrift Grey + Linen Beige;Switchbleade Silver;Summit White;Linen Beige;Moonbeam White + Linen Beige;Moonbeam White;aviar Black;Sanddrift Grey;Velvet Red;Linen Beige;Moonbeam White;Summit White;",
-        transmission: "Manual",
-        fuel_type: "Diesel",
-        body_style: "SUV",
-        model_year:2017,
-        vehicle_mileage:40000,
-        vehicle_id: "VH01"
-    }
-]
+var mongoose = require('mongoose');
 
-module.exports.vehicles = vehicles;
+var vehicleSchema = mongoose.Schema(
+{
+    vehicle_code:       { type: String },
+    make_name:          { type: String },
+    model_name:         { type: String },
+    description:        { type: String },
+    cash_price:         { type: String },
+    color:              [{ type: String }],
+    transmission:       { type: String },
+    fuel_type:          { type: String },
+    body_style:         { type: String },
+    model_year:         { type: Number },
+    vehicle_mileage:    { type: String },
+    registration_month: { type: Number },
+    registration_year:  { type: Number }
+ });
+
+module.exports = mongoose.model('Vehicle', vehicleSchema, 'Vehicle');
