@@ -1,18 +1,83 @@
 const httpStatus = require('http-status');
 const vehiclesCollection = require('../models/vehicle.model');
+const Dealer_StockCollection = require('../models/Dealer_Stock.model');
 
-//Get Makes 
+//Get Makes
 exports.getMakes = async (req, res, next) => {
+    console.log('we are on Get Makes - api/v1/vehicles/make? api');
     try {
-        const makeList = await vehiclesCollection.Vehicles.map(a => a.make_name)
-        .filter((value, index, self) => self.indexOf(value) === index);
-        res.status(httpStatus.OK).json(makeList);
+        let dealer_id = req.query.dealer_id;
+        console.log('dealer id = ' + dealer_id);
         
-    } catch (error) {
-        next(error);
-        res.status(httpStatus.NOT_FOUND);
+        let dealerstock = null;
+        if (dealer_id == undefined) {
+            dealerstock = await vehiclesCollection.find();
+            console.log('Picked vehicles : ' + dealerstock);
+            //console.log("$dealer_stock_vehicles");
+            if (dealerstock  != ''){
+                res.status(httpStatus.OK).json(dealerstock);
+            }
+            else {
+                res.status(httpStatus.NOT_FOUND).json({
+                message: 'No vehicles(s) found',
+                status_code: httpStatus.NOT_FOUND,
+                input_params: req.query
+               });
+            }
+        }
+        else {
+            vehiclesCollection.aggregate([
+                {
+                    $lookup: {
+                        from: "Dealer_Stock",
+                        localField: "vehicle_code",
+                        foreignField: "vehicle_code",
+                        as: "dealer_stock_vehicles"
+                    }
+                },
+                {
+                   $match:{
+                       $and:[{"dealer_stock_vehicles.dealer_id" : dealer_id}]
+                    }
+                },
+                {
+                    $project:{
+                       _id : 1,
+                       vehicle_code : 1,
+                       make_name : 1,
+                       model_name : 1,
+                       description : 1,
+                       cash_price : 1,
+                       color : 1,
+                       transmission : 1,
+                       fuel_type : 1,
+                       body_style: 1,
+                       model_year: 1,
+                       vehicle_mileage: 1,
+                       registration_month: 1,
+                       registration_year: 1
+                    }
+                }
+ 
+            ],
+            function (err, response) {
+                console.log(err,response)
+                console.log(response)
+                res.status(httpStatus.OK).json(response);
+            }
+            );
+    
+        }
+ 
+    } catch (er)
+    {
+        next(er);
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            message: er,
+            status_code: httpStatus.INTERNAL_SERVER_ERROR
+        });
     }
-}
+};
 
 //Get Models based on given make
 exports.getModels = async (req, res, next) => {
