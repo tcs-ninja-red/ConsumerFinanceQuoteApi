@@ -95,7 +95,7 @@ exports.getVehicleInfo = async (req, res) => {
     console.log('query params: ' + req.params.id);
     
     try {
-        var vehicle = await vehiclesCollection.find({"vehicle_id" : req.params.id});
+        var vehicle = await vehiclesCollection.find({"vehicle_code" : req.params.id});
 
         if (vehicle != '') {
             res.status(httpStatus.OK).json(vehicle);
