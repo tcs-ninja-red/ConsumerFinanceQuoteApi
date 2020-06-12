@@ -13,6 +13,6 @@ var vehicleSchema = mongoose.Schema(
     body_style:     {type:String},
     model_year:     {type:Number},
     vehicle_mileage:{type: String} 
- });
+ }); 
 
 module.exports = mongoose.model('Vehicle', vehicleSchema, 'Vehicle');

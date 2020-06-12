@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const vehiclesCollection = require('../models/vehicle.model');
 
-//Get Makes
+//Get Makes 
 exports.getMakes = async (req, res, next) => {
     try {
         const makeList = await vehiclesCollection.Vehicles.map(a => a.make_name)
