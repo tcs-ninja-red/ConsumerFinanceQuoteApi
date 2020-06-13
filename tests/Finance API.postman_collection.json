@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "f3b442c3-de82-4a18-84c0-fe9ee21db304",
-		"name": "Finance API copy",
+		"_postman_id": "d735afc3-cb9d-4a12-9566-49b8a9df81c3",
+		"name": "Finance API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -157,7 +157,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:44301/api/v1/vehicles/VH01",
+					"raw": "http://localhost:44301/api/v1/vehicles/vh01",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -167,7 +167,7 @@
 						"api",
 						"v1",
 						"vehicles",
-						"VH01"
+						"vh01"
 					]
 				}
 			},
@@ -394,7 +394,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:44301/api/v1/vehicles?make_name=Ferrari&model_name=430 Scuderia&description=Coupe, Convertible",
+					"raw": "http://localhost:44301/api/v1/vehicles?make_name=Ferrari&model_name=Scuderia&description=Coupe, Convertible",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -412,7 +412,7 @@
 						},
 						{
 							"key": "model_name",
-							"value": "430 Scuderia"
+							"value": "Scuderia"
 						},
 						{
 							"key": "description",
@@ -541,7 +541,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:44301/api/v1/vehicles/makes/Ferrari/models/430 Scuderia/descriptions",
+					"raw": "http://localhost:44301/api/v1/vehicles/makes/Ferrari/models/Scuderia/descriptions",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -554,7 +554,7 @@
 						"makes",
 						"Ferrari",
 						"models",
-						"430 Scuderia",
+						"Scuderia",
 						"descriptions"
 					]
 				}
@@ -568,7 +568,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"financial\": {\n        \"product\": \"HP\",\n        \"cash_price\": 10000,\n        \"deposit_amount\": 2000,\n        \"term\": 12\n    },\n    \"max_annual_mileage\": 6000,\n    \"vehicle\": {\n        \"vehicle_mileage\": 5000,\n        \"registration_month\": 1,\n        \"registration_year\": 2019,\n        \"make\": \"Ford\",\n        \"model\": \"Focus\",\n        \"description\": \"2019 model\",\n        \"model_year\": 2019\n    }\n}",
+					"raw": "{\n    \"financial\": {\n        \"product\": \"PCP\",\n        \"cash_price\": 10000,\n        \"deposit_amount\": 2000,\n        \"term\": 24\n    },\n    \"max_annual_mileage\": 6000,\n    \"vehicle\": {\n        \"vehicle_code\": \"vh01\",\n        \"vehicle_mileage\": 5000,\n        \"registration_month\": 1,\n        \"registration_year\": 2020,\n        \"make\": \"Ford\",\n        \"model\": \"Focus\",\n        \"description\": \"2019 model\",\n        \"model_year\": 2019\n    },\n    \"dealer_id\": \"50010001\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -592,12 +592,12 @@
 			"response": []
 		},
 		{
-			"name": "Getmakes bydealer filter - api/v1/vehicles/makes?dealer_id=dlr0000001",
+			"name": "GetMakesByDealerId - api/v1/vehicles/makes?dealer_id=50010001",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:44301/api/v1/vehicles/makes?dealer_id=dlr0000001",
+					"raw": "http://localhost:44301/api/v1/vehicles/makes?dealer_id=50010003",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -612,7 +612,7 @@
 					"query": [
 						{
 							"key": "dealer_id",
-							"value": "dlr0000001"
+							"value": "50010003"
 						}
 					]
 				}
