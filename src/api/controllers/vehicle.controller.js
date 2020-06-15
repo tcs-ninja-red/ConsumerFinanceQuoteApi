@@ -8,61 +8,79 @@ exports.getMakes = async (req, res, next) => {
     try {
         let dealer_id = req.query.dealer_id;
         console.log('dealer id = ' + dealer_id);
-        
-        let dealerstock = null;
-        if (dealer_id == undefined) {
-            dealerstock = await vehiclesCollection.distinct("make_name");
-            console.log('Picked Makes : ' + dealerstock);
-            //console.log("$dealer_stock_vehicles");
-            if (dealerstock  != ''){
-                res.status(httpStatus.OK).json(dealerstock);
-            }
-            else {
-                res.status(httpStatus.NOT_FOUND).json({
-                message: 'No vehicles(s) found',
-                status_code: httpStatus.NOT_FOUND,
-                input_params: req.query
-               });
-            }
-        }
-        else {
-            vehiclesCollection.aggregate([
-                {
-                    $lookup: {
-                        from: "Dealer_Stock",
-                        localField: "vehicle_code",
-                        foreignField: "vehicle_code",
-                        as: "dealer_stock_vehicles"
-                    }
-                },
-                {
-                   $match:{
-                       $and:[{"dealer_stock_vehicles.dealer_id" : dealer_id}]
-                    }
-                },
-                {
-                    $project:{
-                       make_name : 1
-                    }
+
+        var myPromise = () => {
+            return new Promise((resolve, reject) => {
+                if (dealer_id == undefined) {
+                    vehiclesCollection.distinct("make_name").then(function (makes, err) {
+                        if (err) {
+                            reject({
+                                message: "Something went wrong!!!. " + err,
+                                status_code: httpStatus.INTERNAL_SERVER_ERROR
+                            });
+                        }
+                        else if (makes.length == 0) {
+                            console.log('No makes found.');
+                            reject({
+                                message: 'No makes found.',
+                                status_code: httpStatus.BAD_REQUEST
+                            });
+                        }
+                        else { resolve(makes); }
+                    });
                 }
- 
-            ],
-            function (err, response) {
-                console.log(err,response)
-                console.log(response)
-                res.status(httpStatus.OK).json(response);
-            }
-            );
-    
-        }
- 
+                else {
+            
+                    Dealer_StockCollection.distinct("vehicle_code", { "dealer_id": dealer_id }).then(function (vehiclecodes, err) {
+                        console.log("Vehicle Codes: ", vehiclecodes);
+                        if (err) {
+                            reject({
+                                message: "Something went wrong!!!. " + err,
+                                status_code: httpStatus.INTERNAL_SERVER_ERROR
+                            });
+                        }
+                        else if (vehiclecodes == undefined || vehiclecodes.length == 0) {
+                            console.log('No vehicle(s) found for this dealer.');
+                            reject({
+                                message: 'No vehicle(s) found for this dealer.',
+                                status_code: httpStatus.BAD_REQUEST,
+                                input_params: req.query
+                            });
+                        }
+                        else {
+                            vehiclesCollection.distinct("make_name", { "vehicle_code": vehiclecodes }).then(function (makes, err) {
+                                console.log("Makes: ", makes);
+                                if (err) {
+                                    reject({
+                                        message: "Something went wrong!!!. " + err,
+                                        status_code: httpStatus.INTERNAL_SERVER_ERROR
+                                    });
+                                }
+                                else if (makes.length == 0) {
+                                    reject({
+                                        message: 'Vehicle(s) found but No make(s) found for this dealer',
+                                        status_code: httpStatus.BAD_REQUEST,
+                                        input_params: req.query
+                                    });
+                                }
+                                else {
+                                    resolve(makes);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        };
+        await myPromise().then(result => {
+            console.log(result);
+            res.status(httpStatus.OK).json(result);
+        }).catch(err => {
+            res.status(err.status_code).json(err);
+        });
     } catch (er)
     {
         next(er);
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            message: er,
-            status_code: httpStatus.INTERNAL_SERVER_ERROR
-        });
     }
 };
 
@@ -76,9 +94,9 @@ exports.getModels = async (req, res, next) => {
                 res.status(httpStatus.OK).json(result);
             }
             else {
-                res.status(httpStatus.NOT_FOUND).json({
+                res.status(httpStatus.BAD_REQUEST).json({
                     message: "No Models found for this Make: " + req.params.make_name ,
-                    status_code: httpStatus.NOT_FOUND
+                    status_code: httpStatus.BAD_REQUEST
                 });
             }
         })
@@ -106,9 +124,9 @@ exports.getDescriptions = async (req, res, next) => {
                 res.status(httpStatus.OK).json(result);
             }
             else {
-                res.status(httpStatus.NOT_FOUND).json({
+                res.status(httpStatus.BAD_REQUEST).json({
                     message: "No Description found for this Make : " + req.params.make_name + "Models: " + req.params.model_name ,
-                    status_code: httpStatus.NOT_FOUND
+                    status_code: httpStatus.BAD_REQUEST
                 });
             }
         })
@@ -151,9 +169,9 @@ exports.getVehicles = async (req, res, next) => {
         }
         else
         {
-            res.status(httpStatus.NOT_FOUND).json({
+            res.status(httpStatus.BAD_REQUEST).json({
                 message: 'No vehicles(s) found',
-                status_code: httpStatus.NOT_FOUND,
+                status_code: httpStatus.BAD_REQUEST,
                 input_params: req.query
             });
         }
@@ -179,9 +197,9 @@ exports.getVehicleInfo = async (req, res) => {
             res.status(httpStatus.OK).json(vehicle);
         }
         else {
-            res.status(httpStatus.NOT_FOUND).json({
+            res.status(httpStatus.BAD_REQUEST).json({
                 message: 'No vehicles(s) found',
-                status_code: httpStatus.NOT_FOUND,
+                status_code: httpStatus.BAD_REQUEST,
                 input_params: req.params.id
             });
         }

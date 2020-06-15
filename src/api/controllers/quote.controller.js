@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const quoteModel = require('../models/quote.model');
 const pricingCollection = require('../models/pricing.model');
+const planCollection = require('../models/plan.model');
 
 // Genarate Quote based on given finance and vehicle data
 exports.generateQuote = async (req, res, next) => {
@@ -18,6 +19,9 @@ exports.generateQuote = async (req, res, next) => {
         else if (chunk.financial.product === undefined || (chunk.financial.product != 'HP' && chunk.financial.product != 'PCP')) {
             isValid = false;
         }
+        else if (chunk.dealer_id === undefined || chunk.dealer_id =='') {
+            isValid = false;
+        }
         console.log("Is Valid Quote ?", isValid);
 
 
@@ -33,71 +37,132 @@ exports.generateQuote = async (req, res, next) => {
         console.log("Validation success!!! Continue Quote process.");
 
         let product = chunk.financial.product;
+        
+        // Calculatiom quote process starts.
+        var myQuotePromise = () => {
+            return new Promise((resolve, reject) => {
+                //Get Plans validation
+                //Validate Plan available for the given dealer and plan
+                planCollection.find({ "dealer_id": chunk.dealer_id, "plan_id": chunk.financial.product }).then(function (plans, err) {
+                    console.log("Get Plan data: ", plans);
+                    if (err) {
+                        reject({
+                            message: "Something went wrong!!!. " + err,
+                            status_code: httpStatus.INTERNAL_SERVER_ERROR
+                        });
+                    }
+                    if (plans.length == 0) {
+                        reject({
+                            message: "Invalid request. No Plan(s) found for this dealer. Please try some other vehicle combinations",
+                            status_code: httpStatus.BAD_REQUEST
+                        });
+                    }
+                    else {
+                        if (chunk.financial.deposit_amount < plans[0].minimum_deposit) {
+                            reject({
+                                message: "Invalid request. Deposit amount should be greater than minimum deposit amount - " + plans[0].minimum_deposit,
+                                status_code: httpStatus.BAD_REQUEST,
+                                input_params: {"param_name": "deposit_amount", "param_value": chunk.financial.deposit_amount}
+                            });
+                        }
+                        chunk.apr = plans[0].apr;
 
-        if (product === 'HP')
-        {
-            console.log("HP Product, So No Pricing details");
-            response = this.calculateQuote(chunk, 0).then(response => {
-                console.log("Response json:", response);
-                res.status(httpStatus.OK).json(response);
-            });
-        }
-        else if (product === 'PCP')
-        {
-            console.log("PCP Product, So calling Pricing details");
-            //Validate GFV Pricing available for the vehicle and return error of not found
-            this.getPricing(chunk).then((result) => {
-                //console.log("Get Pricing data: ", result[0]);
-                response = this.calculateQuote(chunk, result[0].future_price).then(response => {
-                    console.log("Response json:", response);
-                    res.status(httpStatus.OK).json(response);
+                        if (chunk.financial.product === 'PCP') {
+                            console.log("PCP Product, So calling Pricing details");
+                            //Validate Pricing available for the vehicle and return error of not found
+                            pricingCollection.find({
+                                "vehicle_code": chunk.vehicle.vehicle_code,
+                                "registered_month": chunk.vehicle.registration_month,
+                                "registered_year": chunk.vehicle.registration_year,
+                                "term": chunk.financial.term
+                            }).then(function(pricingResult, err) {
+                                console.log("Pricing Data: ", pricingResult);
+                                if (err) {
+                                    reject({
+                                        message: "Something went wrong!!!. " + err,
+                                        status_code: httpStatus.INTERNAL_SERVER_ERROR
+                                    });
+                                }
+                                else if (pricingResult.length == 0) {
+                                    reject({
+                                        message: "Invalid request. Pricing Not avaialable for the given vehicle combinations",
+                                        status_code: httpStatus.BAD_REQUEST
+                                    });
+                                }
+                                else {
+                                    //console.log("reqeust before update: ", chunk);
+                                    chunk.pricing = pricingResult[0].future_price;
+                                    //console.log("reqeust after update: ", chunk);
+                                    resolve(chunk);
+                                }
+                            });
+                        }
+                        else {
+                            resolve(chunk);
+                        }
+                    }
                 });
-            }).catch((err) => {
-                if (err == httpStatus.NOT_FOUND) {
-                    res.status(httpStatus.NOT_FOUND).json({
-                        message: "Pricing Not avaialable for the given vehicle combinations",
-                        status_code: httpStatus.NOT_FOUND
-                    });
-                }
-                else {
-                    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-                        message: "Something went wrong.",
-                        status_code: httpStatus.INTERNAL_SERVER_ERROR
-                    });
-                }
             });
-        }
-    } catch (er) {
-        next(er);
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            message: er,
-            status_code: httpStatus.INTERNAL_SERVER_ERROR
+        };
+
+        //Receveid all necessary data for quote calculation. Start Calculate Quote process.
+        await myQuotePromise().then(result => {
+            var response = this.calculateQuote(result);
+            console.log(response);
+            res.status(httpStatus.OK).json(response);
+        }).catch(err =>{
+            console.log(err);    
+            res.status(err.status_code).json(err);
         });
+    }
+    catch (er) {
+        next(er);
     }
 };
 
-exports.getPricing = async (req) => {
-    console.log("We are on getPricing module");
-    return new Promise((resolve, reject) => {
-        pricingCollection.find({
-            "vehicle_code": req.vehicle.vehicle_code,
-            "registered_month": req.vehicle.registration_month,
-            "registered_year": req.vehicle.registration_year,
-            "term": req.financial.term
-        }).then(doc => {
-            //console.log("From database: ", doc);
-            if (doc.length > 0) {
-                resolve(doc);
-            } else {
-                reject(httpStatus.NOT_FOUND);
-            }
-        }).catch(err => {
-            reject(httpStatus.INTERNAL_SERVER_ERROR);
-        });
-    });
-};
+// Get Pricing details based on vehicle code, registration month & year and term.
+// exports.getPricing = async (req) => {
+//     console.log("We are on getPricing module");
+//     return new Promise((resolve, reject) => {
+//         pricingCollection.find({
+//             "vehicle_code": req.vehicle.vehicle_code,
+//             "registered_month": req.vehicle.registration_month,
+//             "registered_year": req.vehicle.registration_year,
+//             "term": req.financial.term
+//         }).then(doc => {
+//             //console.log("From database: ", doc);
+//             if (doc.length > 0) {
+//                 resolve(doc[0]);
+//             } else {
+//                 reject(httpStatus.BAD_REQUEST);
+//             }
+//         }).catch(err => {
+//             reject(httpStatus.INTERNAL_SERVER_ERROR);
+//         });
+//     });
+// };
 
-exports.calculateQuote = async (chunk, price) => {
+// Get Plans details based on dealer id
+// exports.getPlan = (dealer_id, plan_id) => {
+//     console.log("We are on getPlan module");
+
+//     return new Promise((resolve, reject) => {
+//         planCollection.find({ "dealer_id": dealer_id, "plan_id": plan_id })
+//             .then(doc => {
+//                 console.log("Plan data: ", doc);
+//                 if (doc.length > 0) {
+//                     resolve(doc);
+//                 } else {
+//                     reject(httpStatus.BAD_REQUEST);
+//                 }
+//             }).catch(err => {
+//                 reject(httpStatus.INTERNAL_SERVER_ERROR);
+//             });
+//         });
+// };
+
+// Calcualte Quote based on given finance and vehicle data and return quote response json.
+exports.calculateQuote = (chunk) =>{
     console.log("We are on calculateQuote module");
 
     let response = quoteModel.Quote;
@@ -114,7 +179,7 @@ exports.calculateQuote = async (chunk, price) => {
     let term = chunk.financial.term;
     
     let amount_of_credit = cash_price - deposit_amount;
-    let total_charge_for_credit = ((amount_of_credit * rate * term) / (12 * 100));
+    let total_charge_for_credit = ((amount_of_credit * chunk.apr * term) / (12 * 100));
     let total_amount_payable = amount_of_credit + total_charge_for_credit;
 
     if (product === 'HP') {
@@ -123,11 +188,7 @@ exports.calculateQuote = async (chunk, price) => {
         monthly_payment_amount = first_payment_amount;
     }
     else if (product === 'PCP') {
-        let pricingPerc = price;
-    
-        // if (pricingPerc === undefined) {
-        //     pricingPerc = 50;
-        // }
+        let pricingPerc = chunk.pricing;
 
         let pricing = (cash_price * pricingPerc) / 100;
         first_payment_amount = ((total_amount_payable - pricing) / (term - 1));
@@ -156,8 +217,8 @@ exports.calculateQuote = async (chunk, price) => {
     response.final_payment_amount = parseFloat(final_payment_amount.toFixed(2));
     response.amount_of_credit = parseFloat(amount_of_credit.toFixed(2));
     response.total_charge_for_credit = parseFloat(total_charge_for_credit.toFixed(2));
-    response.fixed_rate_interest = rate;
-    response.apr = rate;
+    response.fixed_rate_interest = chunk.apr;
+    response.apr = chunk.apr;
     response.total_amount_payable = parseFloat(total_amount_payable.toFixed(2));
 
     return response;
