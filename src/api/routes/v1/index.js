@@ -4,6 +4,7 @@ const express = require('express');
 const vehicleRoute = require('./vehicle.route');
 const dealerRoute = require('./dealer.route');
 const quoteRoute = require('./quote.route');
+const proposalRoute = require('./proposal.route');
 
 const router = express.Router();
 
@@ -21,5 +22,6 @@ router.get('/healthcheck', (req, res) => {
 router.use('/vehicles', vehicleRoute);
 router.use('/dealers', dealerRoute);
 router.use('/quotes', quoteRoute);
+router.use('/proposals', proposalRoute);
 
 module.exports = router;
