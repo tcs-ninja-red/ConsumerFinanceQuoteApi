@@ -8,6 +8,7 @@ const quoteModel = {
         "term": "decimal"
     },
     "vehicle": {
+        "vehicle_code": "string",
         "vehicle_mileage": "integer",
         "registration_month": "integer",
         "registration_year": "integer",
@@ -25,7 +26,8 @@ const quoteModel = {
     "total_charge_for_credit": "decimal",
     "fixed_rate_interest": "decimal",
     "apr": "decimal",
-    "total_amount_payable": "decimal"
+    "total_amount_payable": "decimal",
+    "dealer_id": "string"
 }
 
 module.exports.Quote = quoteModel;

@@ -202,6 +202,8 @@ exports.calculateQuote = (chunk) =>{
     response.financial.term = chunk.financial.term;
     response.financial.deposit_amount = chunk.financial.deposit_amount;
     response.max_annual_mileage = chunk.max_annual_mileage;
+
+    response.vehicle.vehicle_code = chunk.vehicle.vehicle_code;
     response.vehicle.vehicle_mileage = chunk.vehicle.vehicle_mileage;
     response.vehicle.registration_month = chunk.vehicle.registration_month;
     response.vehicle.registration_year = chunk.vehicle.registration_year;
@@ -209,6 +211,7 @@ exports.calculateQuote = (chunk) =>{
     response.vehicle.model = chunk.vehicle.model;
     response.vehicle.description = chunk.vehicle.description;
     response.vehicle.model_year = chunk.vehicle.model_year;
+    response.dealer_id = chunk.dealer_id;
     
     //Calculated Response
     response.excess_mileage = parseFloat(excess_mileage.toFixed(2));
