@@ -623,10 +623,21 @@
 			"name": "SubmitProposal - /api/v1/proposals",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "dealer_id",
+						"value": "50010001",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"financial\": {\n        \"product\": \"PCP\",\n        \"cash_price\": 10000,\n        \"deposit_amount\": 2000,\n        \"term\": 24\n    },\n    \"vehicle\": {\n        \"vehicle_code\": \"vh01\",\n        \"vehicle_mileage\": 5000,\n        \"registration_month\": 1,\n        \"registration_year\": 2020,\n        \"make\": \"Ford\",\n        \"model\": \"Focus\",\n        \"description\": \"2019 model\",\n        \"model_year\": 2019\n    },\n    \"excess_mileage\": 0,\n    \"max_annual_mileage\": 6000,\n    \"first_payment_amount\": 113.91,\n    \"monthly_payment_amount\": 113.91,\n    \"final_payment_amount\": 6500,\n    \"amount_of_credit\": 8000,\n    \"total_charge_for_credit\": 1120,\n    \"fixed_rate_interest\": 7,\n    \"apr\": 7,\n    \"total_amount_payable\": 9120,\n    \"dealer_id\": \"50010001\",\n    \"customer\": {\n        \"first_name\": \"Kannan\",\n        \"surname\": \"Sankaranarayanan\",\n        \"date_of_birth\": \"dd/mm/yyyy\",\n        \"address\": {\n            \"address1\": \"Address 1\",\n            \"address2\": \"Address 2\",\n            \"address3\": \"Address 3\",\n            \"postcode\": \"CF10 5BR\",\n            \"town\": \"Grangetown\",\n            \"city\": \"Cardiff\"\n        }\n    }\n}",
+					"raw": "{\n    \"financial\": {\n        \"product\": \"PCP\",\n        \"cash_price\": 10000,\n        \"deposit_amount\": 2000,\n        \"term\": 12\n    },\n    \"vehicle\": {\n        \"vehicle_code\": \"vh01\",\n        \"vehicle_mileage\": 5000,\n        \"registration_month\": 1,\n        \"registration_year\": 2020,\n        \"make\": \"Ford\",\n        \"model\": \"Focus\",\n        \"description\": \"2019 model\",\n        \"model_year\": 2019\n    },\n    \"excess_mileage\": 0,\n    \"max_annual_mileage\": 6000,\n    \"first_payment_amount\": 113.91,\n    \"monthly_payment_amount\": 113.91,\n    \"final_payment_amount\": 6500,\n    \"amount_of_credit\": 8000,\n    \"total_charge_for_credit\": 1120,\n    \"fixed_rate_interest\": 7,\n    \"apr\": 7,\n    \"total_amount_payable\": 9120,\n    \"customer\": {\n        \"first_name\": \"Kannan\",\n        \"surname\": \"Sankaranarayanan\",\n        \"date_of_birth\": \"01/10/1990\",\n        \"email\": \"abc@xyz.co.uk\",\n        \"address\": {\n            \"address1\": \"Address 1\",\n            \"address2\": \"Address 2\",\n            \"address3\": \"Address 3\",\n            \"postcode\": \"CF10 5BR\",\n            \"town\": \"Grangetown\",\n            \"city\": \"Cardiff\"\n        }\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
