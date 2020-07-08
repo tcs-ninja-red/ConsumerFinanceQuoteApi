@@ -5,7 +5,7 @@ const planCollection = require('../models/plan.model');
 const Proposal = require('../models/proposal.model');
 const mongoose = require('mongoose');
 
-exports.SubmitProposal = async (req, res, next) => { 
+exports.createProposal = async (req, res, next) => { 
     try {
         console.log('we are on proposal controller - api/v1/proposals api');
         
@@ -50,6 +50,7 @@ exports.SubmitProposal = async (req, res, next) => {
                 description:  chunk.vehicle.description,
                 model_year:  chunk.vehicle.model_year
             },
+            max_annual_mileage: chunk.max_annual_mileage,
             excess_mileage: chunk.excess_mileage,
             first_payment_amount: chunk.first_payment_amount,
             monthly_payment_amount: chunk.monthly_payment_amount,
@@ -60,6 +61,15 @@ exports.SubmitProposal = async (req, res, next) => {
             apr: chunk.apr,
             total_amount_payable: chunk.total_amount_payable
         });
+
+        //Proposal request validation
+        let validateError = proposal.validateSync();
+
+        if (validateError) {
+            if (validateError.name === 'ValidationError') {
+                return this.handleValidationError(validateError, res);
+            }
+        }
 
         proposal.save().then(result => {
             //console.log(result);
@@ -83,14 +93,27 @@ exports.SubmitProposal = async (req, res, next) => {
                 }
             });
         }).catch(err => {
-            console.log(err);
+            console.log(err.message);
             res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-                "message": "Something went wrong!! \n" + err,
-                "status_code": httpStatus.INTERNAL_SERVER_ERROR
+                messages: ["Something went wrong!! \n" + err.message],
+                status_code: httpStatus.INTERNAL_SERVER_ERROR
             });
         });
     }
     catch (er) {
         next(er);
     }
+};
+
+exports.handleValidationError = (err, res) => {
+    console.log('You are in handleValidateError method');
+    const messages = [];
+    for (let field in err.errors) {
+        messages.push(err.errors[field].message);
+        console.log(err.errors[field].message);
+    }
+    res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
+        status_code: httpStatus.UNPROCESSABLE_ENTITY,
+        messages: messages
+    });
 };

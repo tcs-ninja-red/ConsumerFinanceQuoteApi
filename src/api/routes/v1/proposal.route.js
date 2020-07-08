@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.use(express.json());    // <==== parse request body as JSON
 
-router.route('/').post(controller.SubmitProposal);
+router.route('/').post(controller.createProposal);
 
 module.exports = router;
