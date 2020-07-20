@@ -146,20 +146,10 @@ exports.getVehicles = async (req, res, next) => {
         let make = req.query.make_name;
         let model = req.query.model_name;
         let desc = req.query.description;
-        let modelYear = req.query.model_year;
 
-        console.log(`Query Params: [make, model, description, model_year [${make},${model},${desc},${modelYear}]`);
+        console.log(`Query Params: [make, model, description [${make},${model},${desc}]`);
         
-        let vehicles = null;
-        if (make != undefined || model != undefined || desc != undefined || modelYear != undefined) {
-            vehicles = await vehiclesCollection.find({
-                "make_name" : make,
-                "model_name" : model,
-                "description" : desc});
-        }
-        else {
-            vehicles = await vehiclesCollection.find();
-        }
+        let vehicles = await vehiclesCollection.find(req.query);
         
         console.log('Picked vehicles : ' + vehicles);
         
