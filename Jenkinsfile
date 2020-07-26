@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Sonar Test') {
             steps {
-                echo 'Testing..'
+            sh "/var/jenkins_home/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/bin/sonar-scanner -Dsonar.host.url=http://51.132.233.171:9001 -Dsonar.projectName=ConsumerFinanceAPI -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ConsumerFinanceAPI:app -Dsonar.sources=. -Dsonar.projectBaseDir=${WORKSPACE}"
             }
         }
         stage('Build') {
