@@ -48,12 +48,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:44301/api/v1/proposals",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/proposals",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -103,12 +101,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:44301/api/v1/proposals",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/proposals",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -158,12 +154,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:44301/api/v1/proposals",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/proposals",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -213,12 +207,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:44301/api/v1/proposals",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/proposals",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -268,12 +260,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:44301/api/v1/proposals",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/proposals",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -312,12 +302,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:44301/api/v1/vehicles",
-									"protocol": "http",
+									"raw": "{{api_base_url}}/api/v1/vehicles",
 									"host": [
-										"localhost"
+										"{{api_base_url}}"
 									],
-									"port": "44301",
 									"path": [
 										"api",
 										"v1",
@@ -399,12 +387,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:44301/api/v1/vehicles?make_name=Ferrari&model_name=Scuderia&description=Medium Convertible",
-									"protocol": "http",
+									"raw": "{{api_base_url}}/api/v1/vehicles?make_name=Ferrari&model_name=Scuderia&description=Medium Convertible",
 									"host": [
-										"localhost"
+										"{{api_base_url}}"
 									],
-									"port": "44301",
 									"path": [
 										"api",
 										"v1",
@@ -514,12 +500,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:44301/api/v1/vehicles?make_name=Ferrari&model_name=Scuderia",
-									"protocol": "http",
+									"raw": "{{api_base_url}}/api/v1/vehicles?make_name=Ferrari&model_name=Scuderia",
 									"host": [
-										"localhost"
+										"{{api_base_url}}"
 									],
-									"port": "44301",
 									"path": [
 										"api",
 										"v1",
@@ -625,12 +609,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:44301/api/v1/vehicles?make_name=Ferrari&model_name=Scuderia",
-									"protocol": "http",
+									"raw": "{{api_base_url}}/api/v1/vehicles?make_name=Ferrari&model_name=Scuderia",
 									"host": [
-										"localhost"
+										"{{api_base_url}}"
 									],
-									"port": "44301",
 									"path": [
 										"api",
 										"v1",
@@ -726,12 +708,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:44301/api/v1/vehicles/vh01",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/vehicles/vh01",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -853,12 +833,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:44301/api/v1/vehicles/makes",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/vehicles/makes",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -875,12 +853,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:44301/api/v1/vehicles/makes/Ferrari/models",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/vehicles/makes/Ferrari/models",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -899,12 +875,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:44301/api/v1/vehicles/makes/Ferrari/models/Scuderia/descriptions",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/vehicles/makes/Ferrari/models/Scuderia/descriptions",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -931,12 +905,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:44301/api/v1/dealers",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/dealers",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -952,12 +924,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:44301/api/v1/dealers?postcode=CF10 5BH",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/dealers?postcode=CF10 5BH",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -1041,12 +1011,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:44301/api/v1/vehicles/makes?dealer_id=50010003",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/vehicles/makes?dealer_id=50010003",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -1098,12 +1066,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:44301/api/v1/quotes",
-							"protocol": "http",
+							"raw": "{{api_base_url}}/api/v1/quotes",
 							"host": [
-								"localhost"
+								"{{api_base_url}}"
 							],
-							"port": "44301",
 							"path": [
 								"api",
 								"v1",
@@ -1136,12 +1102,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:44301/api/v1/healthcheck",
-					"protocol": "http",
+					"raw": "{{api_base_url}}/api/v1/healthcheck",
 					"host": [
-						"localhost"
+						"{{api_base_url}}"
 					],
-					"port": "44301",
 					"path": [
 						"api",
 						"v1",
