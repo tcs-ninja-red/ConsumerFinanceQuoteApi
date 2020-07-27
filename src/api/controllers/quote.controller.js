@@ -27,9 +27,9 @@ exports.generateQuote = async (req, res, next) => {
 
         if (isValid === false) {
             console.log("Validation failed!!! Exit Quote process.");
-            res.status(httpStatus.BAD_REQUEST).json({
-                message: "Invalid request",
-                status_code: httpStatus.BAD_REQUEST
+            res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
+                messages: ["Invalid request"],
+                status_code: httpStatus.UNPROCESSABLE_ENTITY
             });
             return;
         }
@@ -47,21 +47,21 @@ exports.generateQuote = async (req, res, next) => {
                     console.log("Get Plan data: ", plans);
                     if (err) {
                         reject({
-                            message: "Something went wrong!!!. " + err,
+                            messages: ["Something went wrong!!!. " + err],
                             status_code: httpStatus.INTERNAL_SERVER_ERROR
                         });
                     }
                     if (plans.length == 0) {
                         reject({
-                            message: "Invalid request. No Plan(s) found for this dealer. Please try some other vehicle combinations",
-                            status_code: httpStatus.BAD_REQUEST
+                            messages: ["Invalid request. No Plan(s) found for this dealer. Please try some other vehicle combinations"],
+                            status_code: httpStatus.UNPROCESSABLE_ENTITY
                         });
                     }
                     else {
                         if (chunk.financial.deposit_amount < plans[0].minimum_deposit) {
                             reject({
-                                message: "Invalid request. Deposit amount should be greater than minimum deposit amount - " + plans[0].minimum_deposit,
-                                status_code: httpStatus.BAD_REQUEST,
+                                messages: ["Invalid request. Deposit amount should be greater than minimum deposit amount - " + plans[0].minimum_deposit],
+                                status_code: httpStatus.UNPROCESSABLE_ENTITY,
                                 input_params: {"param_name": "deposit_amount", "param_value": chunk.financial.deposit_amount}
                             });
                         }
@@ -79,14 +79,14 @@ exports.generateQuote = async (req, res, next) => {
                                 console.log("Pricing Data: ", pricingResult);
                                 if (err) {
                                     reject({
-                                        message: "Something went wrong!!!. " + err,
+                                        messages: ["Something went wrong!!!. " + err],
                                         status_code: httpStatus.INTERNAL_SERVER_ERROR
                                     });
                                 }
                                 else if (pricingResult.length == 0) {
                                     reject({
-                                        message: "Invalid request. Pricing Not avaialable for the given vehicle combinations",
-                                        status_code: httpStatus.BAD_REQUEST
+                                        messages: ["Invalid request. Pricing Not avaialable for the given vehicle combinations"],
+                                        status_code: httpStatus.UNPROCESSABLE_ENTITY
                                     });
                                 }
                                 else {
@@ -119,47 +119,6 @@ exports.generateQuote = async (req, res, next) => {
         next(er);
     }
 };
-
-// Get Pricing details based on vehicle code, registration month & year and term.
-// exports.getPricing = async (req) => {
-//     console.log("We are on getPricing module");
-//     return new Promise((resolve, reject) => {
-//         pricingCollection.find({
-//             "vehicle_code": req.vehicle.vehicle_code,
-//             "registered_month": req.vehicle.registration_month,
-//             "registered_year": req.vehicle.registration_year,
-//             "term": req.financial.term
-//         }).then(doc => {
-//             //console.log("From database: ", doc);
-//             if (doc.length > 0) {
-//                 resolve(doc[0]);
-//             } else {
-//                 reject(httpStatus.BAD_REQUEST);
-//             }
-//         }).catch(err => {
-//             reject(httpStatus.INTERNAL_SERVER_ERROR);
-//         });
-//     });
-// };
-
-// Get Plans details based on dealer id
-// exports.getPlan = (dealer_id, plan_id) => {
-//     console.log("We are on getPlan module");
-
-//     return new Promise((resolve, reject) => {
-//         planCollection.find({ "dealer_id": dealer_id, "plan_id": plan_id })
-//             .then(doc => {
-//                 console.log("Plan data: ", doc);
-//                 if (doc.length > 0) {
-//                     resolve(doc);
-//                 } else {
-//                     reject(httpStatus.BAD_REQUEST);
-//                 }
-//             }).catch(err => {
-//                 reject(httpStatus.INTERNAL_SERVER_ERROR);
-//             });
-//         });
-// };
 
 // Calcualte Quote based on given finance and vehicle data and return quote response json.
 exports.calculateQuote = (chunk) =>{
@@ -202,6 +161,8 @@ exports.calculateQuote = (chunk) =>{
     response.financial.term = chunk.financial.term;
     response.financial.deposit_amount = chunk.financial.deposit_amount;
     response.max_annual_mileage = chunk.max_annual_mileage;
+
+    response.vehicle.vehicle_code = chunk.vehicle.vehicle_code;
     response.vehicle.vehicle_mileage = chunk.vehicle.vehicle_mileage;
     response.vehicle.registration_month = chunk.vehicle.registration_month;
     response.vehicle.registration_year = chunk.vehicle.registration_year;
@@ -209,6 +170,7 @@ exports.calculateQuote = (chunk) =>{
     response.vehicle.model = chunk.vehicle.model;
     response.vehicle.description = chunk.vehicle.description;
     response.vehicle.model_year = chunk.vehicle.model_year;
+    response.dealer_id = chunk.dealer_id;
     
     //Calculated Response
     response.excess_mileage = parseFloat(excess_mileage.toFixed(2));
