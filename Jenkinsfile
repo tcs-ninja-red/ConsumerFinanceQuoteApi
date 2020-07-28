@@ -42,18 +42,7 @@ pipeline {
                 sh "docker ps -a"
             }
         }
-
-        stage('API-Integration-Tests') {
-            steps{
-                git 'https://github.com/tcs-ninja-red/api-test-automation.git'
-                sh 'su root'
-                sh 'pwd'
-                sh 'ls -ltr'
-                sh 'npm install'
-                sh 'npm run api-tests-production'
-            }
-       }
-
+        
         stage('upload') {
             steps {
                 sh "docker images"
