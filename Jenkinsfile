@@ -43,6 +43,12 @@ pipeline {
             }
         }
 
+        stage('API - Integration Tests') {
+           git 'https://github.com/tcs-ninja-red/api-test-automation.git'
+           sh 'npm install'
+           sh 'npm run api-tests-production'
+       }
+
         stage('upload') {
             steps {
                 sh "docker images"
