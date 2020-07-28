@@ -159,3 +159,17 @@ constants file. They should be in `.env` file
 > `.env` must never be committed to version control. `.env.example` file should be committed to let other developers know what env variables should be defined
 
 Checkout `.env.example` and `.env` to get the better idea
+
+## API Intergration Tests Groovy Scripts
+
+pipeline {
+   agent any
+
+   stages {
+       stage('api_integration_tests') {
+           git 'https://github.com/tcs-ninja-red/api-test-automation.git'
+           bat 'npm install'
+           bat 'npm run api-tests-production'
+       }
+   }
+}
