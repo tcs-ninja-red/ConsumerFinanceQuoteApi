@@ -42,7 +42,7 @@ pipeline {
                 sh "docker ps -a"
             }
         }
-
+        
         stage('upload') {
             steps {
                 sh "docker images"
