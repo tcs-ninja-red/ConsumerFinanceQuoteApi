@@ -56,7 +56,7 @@ pipeline {
                 sh "docker push venekatpoc.azurecr.io/consumer-finance-house-quote-api:v${BUILD_NUMBER}"
                 echo "Azure Container Registry upload successful"
             }
-            }
         }
     }
 }
+
