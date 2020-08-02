@@ -159,3 +159,25 @@ constants file. They should be in `.env` file
 > `.env` must never be committed to version control. `.env.example` file should be committed to let other developers know what env variables should be defined
 
 Checkout `.env.example` and `.env` to get the better idea
+
+## Quote Calculation:
+
+APR = Dealer APR (based on plan - HP / PCP
+Amount of Credit = Cash Price - Cash Deposit
+Total Charge for Credit = ((Amount of Credit * APR * Term)/(12*100))
+Total Amount Payable = Amount of Credit + Total Charge for Credit
+
+For HP => First/Monthly/Final Payment = Total Amount Payable / Term
+For PCP => 
+	Pricing = (Cash Price * Pricing Perc ) / 100;
+	First Payment Amount = ((Total Amount Payable - Pricing ) / (Term - 1))
+	Final Payment Amount = Pricing
+	Monthtly Payment Amount = First Payment Amount
+	
+## Proposal Decision Logic:
+
+Age = Age from Date of Birth
+Decision = Rejected	=> If Age is less than 16
+Decision = Referred	=> If Time at address is less than 36 
+Decision = Rejected	=> If Employment's monthly gross salaey is less than monthly payment amount
+Decision = Accepted	=> If none of the above conditions met.
